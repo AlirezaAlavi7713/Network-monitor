@@ -16,6 +16,9 @@ export function getConnections() {
   return api.get("/connections");
 }
 
+const BACKEND_URL = import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? "http://localhost:3004" : "https://network-monitor-8rc8.onrender.com");
+
 export function createSocket() {
-  return io(import.meta.env.VITE_API_URL || "http://localhost:3004");
+  return io(BACKEND_URL);
 }
