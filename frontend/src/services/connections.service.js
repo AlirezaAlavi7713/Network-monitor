@@ -17,5 +17,5 @@ export function getConnections() {
 }
 
 export function createSocket() {
-  return io("http://localhost:3004");
+  return io(import.meta.env.VITE_API_URL || "http://localhost:3004");
 }
