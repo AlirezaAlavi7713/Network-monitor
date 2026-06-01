@@ -4,6 +4,42 @@
   padding: 0;
 }
 
+/* Écran de chargement (cold start Render) */
+.loading-screen {
+  align-items: center;
+  background: #0f1117;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  border: 3px solid #2d3748;
+  border-radius: 50%;
+  border-top-color: #38bdf8;
+  height: 48px;
+  width: 48px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-title {
+  color: #38bdf8;
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.loading-msg  { color: #e2e8f0; font-size: 0.9rem; }
+.loading-hint { color: #718096; font-size: 0.78rem; }
+
 body {
   background: #0f1117;
   color: #e2e8f0;

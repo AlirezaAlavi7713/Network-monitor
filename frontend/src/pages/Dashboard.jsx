@@ -29,8 +29,8 @@ export default function Dashboard() {
   const [newKeys, setNewKeys] = useState(new Set());
   // tab : "connections" | "devices"
   const [tab, setTab] = useState("connections");
-  // grouped : true = vue groupée par processus, false = vue détaillée
   const [grouped, setGrouped] = useState(false);
+  const [connecting, setConnecting] = useState(true);
   const prevKeysRef = useRef(new Set());
   const socketRef = useRef(null);
 
@@ -38,8 +38,9 @@ export default function Dashboard() {
     const socket = createSocket();
     socketRef.current = socket;
 
-    socket.on("connect", () => setConnected(true));
+    socket.on("connect", () => { setConnected(true); setConnecting(false); });
     socket.on("disconnect", () => setConnected(false));
+    socket.on("connect_error", () => setConnecting(true));
 
     socket.on("connections:update", (data) => {
       setConnections(data);
@@ -86,6 +87,17 @@ export default function Dashboard() {
   });
 
   const newCount = newKeys.size;
+
+  if (connecting) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner" />
+        <p className="loading-title">Network Monitor</p>
+        <p className="loading-msg">Connexion au serveur en cours…</p>
+        <p className="loading-hint">Le serveur démarre, merci de patienter (~30s)</p>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard">
