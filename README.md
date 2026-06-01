@@ -29,7 +29,7 @@ Dashboard de monitoring réseau en temps réel. Visualise les connexions actives
 | Côté | Technologie |
 |---|---|
 | Frontend | React 19, Vite, Recharts, socket.io-client, Axios |
-| Backend | Node.js, Express, socket.io |
+| Backend | Node.js, Express, socket.io, Helmet, express-rate-limit |
 | Système | `lsof`, `arp` (commandes macOS/Linux) |
 | Temps réel | WebSockets (socket.io) |
 
@@ -159,6 +159,8 @@ DEMO_MODE=false   # true pour activer le mode démo
 - **Commandes réseau** — `lsof` pour les connexions et ports, `arp` pour les appareils locaux
 - **SVG dynamique** — jauge circulaire avec `stroke-dashoffset` pour animer le score
 - **Recharts** — graphes temps réel avec données glissantes
+- **Helmet** — sécurisation des headers HTTP (XSS, clickjacking, HTTPS forcé...)
+- **Rate limiting** — protection brute force et DDoS (100 requêtes / 15 min / IP)
 
 ---
 
